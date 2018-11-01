@@ -1,0 +1,33 @@
+<nav class="navbar navbar-expand-lg fixed-top navbar-transparent" color-on-scroll="500">
+    <div class="container">
+        <div class="navbar-translate">
+            <a class="navbar-brand" hef="#" [routerLink]="['/home']">Drop<span style="color: red; font-weight: bold; font-size: 1.5em;">'N'</span>Box</a>
+            <button class="navbar-toggler navbar-burger" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation" (click)="sidebarToggle()">
+                <span class="navbar-toggler-bar"></span>
+                <span class="navbar-toggler-bar"></span>
+                <span class="navbar-toggler-bar"></span>
+            </button>
+        </div>
+        <div class="collapse navbar-collapse" id="navbarToggler">
+            <ul class="navbar-nav ml-auto">
+
+                <li class="nav-item">
+                    <a href="#" class="nav-link" [routerLink]="['/upload']">Upload</a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#" class="nav-link" [routerLink]="['/files']">Files</a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#" class="nav-link" [routerLink]="['/config']">Config</a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#" class="nav-link">Team</a>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</nav>

@@ -1,0 +1,75 @@
+<div class="wrapper">
+    <div class="page-header section-dark" style="background-image: url('assets/img/dark-bg.jpg')">
+        <div class="container text-center">
+            <div class="row">
+                <div class="col-md-8 ml-auto mr-auto text-center">
+                    <h2 class="title">Manage your files</h2>
+                    <p class="description">Here you can manage sent or received files</p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-10 download-area ml-auto mr-auto">
+
+                    <div class="nav-tabs-navigation">
+                        <div class="nav-tabs-wrapper">
+                            <ngb-tabset [justify]="'center'" class="text-center">
+                                <ngb-tab>
+                                    <ng-template ngbTabTitle>
+                                        <i class="now-ui-icons objects_umbrella-13"></i> Sent Files
+                                    </ng-template>
+                                    <ng-template ngbTabContent>
+                                        <div class="row">
+                                            <div *ngFor="let box of sentBoxes; index as i;"
+                                                 class="col-md-3">
+                                                <div class="card-counter" [ngClass]="{'info': box.status === '0', 'danger': box.status === '1', 'success': box.status === '2' }">
+                                                    <i *ngIf="box.status==0" class="fa fa-lock"></i>
+                                                    <i *ngIf="box.status==1" class="fa fa-key"></i>
+                                                    <i *ngIf="box.status==2" class="fa fa-unlock"></i>
+                                                    <span *ngIf="box.status==0" class="count-numbers" placement="top" >{{box.block}}</span>
+                                                    <span *ngIf="box.status==1" class="count-numbers" placement="top" >{{box.block}}</span>
+                                                    <span *ngIf="box.status==2" class="count-numbers" placement="top" >{{box.block}}</span>
+
+                                                    <span *ngIf="box.status==0" class="count-name" style="cursor: pointer;" ngbTooltip="Download" (click)="download(box); $event.stopPropagation();">Closed</span>
+                                                    <span *ngIf="box.status==1" class="count-name" style="cursor: pointer;" ngbTooltip="Open box" (click)="approve(box); $event.stopPropagation();" >Approve</span>
+                                                    <span *ngIf="box.status==2" class="count-name" style="cursor: pointer;" ngbTooltip="Download" (click)="download(box); $event.stopPropagation();">Opened</span>
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+                                    </ng-template>
+                                </ngb-tab>
+                                <ngb-tab>
+                                    <ng-template ngbTabTitle>
+                                        <i class="now-ui-icons shopping_cart-simple"></i> Received Files
+                                    </ng-template>
+                                    <ng-template ngbTabContent>
+                                        <div class="row">
+                                            <div *ngFor="let box of receivedBoxes; index as i;"
+                                                 class="col-md-3 text-center">
+                                                <div class="card-counter" [ngClass]="{'info': box.status === '0', 'danger': box.status === '1', 'success': box.status === '2' }">
+                                                    <i *ngIf="box.status==0" class="fa fa-lock"></i>
+                                                    <i *ngIf="box.status==1" class="fa fa-key"></i>
+                                                    <i *ngIf="box.status==2" class="fa fa-unlock"></i>
+                                                    <span *ngIf="box.status==0" class="count-numbers" placement="top" >{{box.block}}</span>
+                                                    <span *ngIf="box.status==1" class="count-numbers" placement="top" >{{box.block}}</span>
+                                                    <span *ngIf="box.status==2" class="count-numbers" placement="top" >{{box.block}}</span>
+
+                                                    <span *ngIf="box.status==0" class="count-name" style="cursor: pointer;" ngbTooltip="Request for file" (click)="openRequest(box); $event.stopPropagation();">Closed</span>
+                                                    <span *ngIf="box.status==1" class="count-name" ngbTooltip="Requested">Requested</span>
+                                                    <span *ngIf="box.status==2" class="count-name" ngbTooltip="Download" style="cursor: pointer;" (click)="download(box); $event.stopPropagation();">Opened</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </ng-template>
+                                </ngb-tab>
+                            </ngb-tabset>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

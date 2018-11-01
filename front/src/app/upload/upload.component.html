@@ -1,0 +1,36 @@
+<div class="wrapper">
+    <div class="page-header section-dark" style="background-image: url('assets/img/dark-bg.jpg')">
+            <div class="container text-center">
+                <div class="row">
+                    <div class="col-md-8 ml-auto mr-auto text-center">
+                        <h2 class="title">Drag and Drop the files</h2>
+                        <p class="description">Drag and drop the files you want to transfer</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 download-area ml-auto mr-auto">
+                        <file-drop headertext="Drop the files in this area..." (onFileDrop)="dropped($event)"
+                                   (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)">
+                        </file-drop>
+                    </div>
+                </div>
+                <div class="row">
+
+                    <div class="col-md-6 download-area ml-auto mr-auto">
+                        <input [(ngModel)] = "recipient.name" type="text" class="form-control"
+                               name="password" placeholder="Recipient address" required="" (change)="getRecipient()"/><br><br>
+                    </div>
+
+                </div>
+
+                    <!--
+                <div class="row">
+                    <div class="col-md-6 download-area ml-auto mr-auto">
+                        <a class="btn btn-success btn-round" (click)="upload(x  )">Upload</a>
+                        <a class="btn btn-danger btn-round">Cancel</a>
+                    </div>
+                </div>
+                -->
+            </div>
+    </div>
+</div>

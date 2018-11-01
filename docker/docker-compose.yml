@@ -1,0 +1,44 @@
+version: '2.1'
+services:
+  bootnode:
+    build: client
+    restart: on-failure
+    container_name: bootnode
+#    links:
+#      - ethstats
+    entrypoint: /home/run/geth.sh
+    volumes:
+#      - /etc/localtime:/etc/localtime:ro
+      - ./static/keystore:/home/net/keystore:ro
+      - ./static/genesis.json:/home/data/genesis.json:ro
+      - ./static/bitchin.js:/home/data/bitchin.js:ro
+      - ./contract:/home/data/contract:ro
+      - ./data/bootnode:/home/net:rw
+#      If you want to reuse ethash generated on your machine
+#      - /home/nick/.ethash:/root/.ethash:ro
+      - ~/.ethash:/root/.ethash:rw
+    command: '--datadir /home/net --verbosity 3 --nodiscover --nodekeyhex=7b3508a14627dfbcb50195574240deb1543e960b32efd14a8641a4404a275a87 --rpcapi "miner,personal,admin,db,eth,net,web3,miner,admin,txpool" --rpccorsdomain="*" --networkid 15 --rpc --rpcaddr="0.0.0.0" js "/home/data/bitchin.js"'
+    ports:
+      - "30303:30303"
+      - "30303:30303/udp"
+      - "8545:8545"
+  clientnode:
+    build: client
+    restart: on-failure
+    container_name: clientnode
+    links:
+      - bootnode
+#      - ethstats
+    entrypoint: /home/run/geth.sh
+    volumes:
+#      - /etc/localtime:/etc/localtime:ro
+      - ./static/keystore:/home/net/keystore:ro
+      - ./static/genesis.json:/home/data/genesis.json:ro
+      - ./data/clientnode:/home/net:rw
+    command: '--datadir /home/net --rpccorsdomain="*" --networkid 15 --rpc --bootnodes="enode://5d6cb9e4a5c824a41d6942b5bd13524b61451d3b7bf196966b99ef50b5b48780c9de55bef5a69002ada457b40dda5d36e944431049ae82ce5adef97d3d214a48@BOOTNODE_IP:30303" --rpcapi "miner,personal,admin,db,eth,net,web3,miner,admin"'
+  ipfs:
+    image: ipfs/go-ipfs
+    volumes:
+      - ./data/ipfs:/data/ipfs:rw
+    ports:
+      - "5001:5001"
