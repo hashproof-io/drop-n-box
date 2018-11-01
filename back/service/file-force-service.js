@@ -120,12 +120,10 @@ class FileForceService extends FileForce {
                 let result = {};
                 this.add(data.path, selfKeyPair, selfKeyPair.publicKey, {metadata: metadata})
                     .then(res => {
-                        console.log('hash:' + res.hash);
                         result.ecTagHashBn = this.decodeToBN256(res.hash);
                         return this.decryptEcTag(res.ecTag, selfKeyPair);
                     }).then(tag=>{
                         result.signature = new Signature({r: tag.signature.r, s: tag.signature.s, recoveryParam: tag.signature.v});
-                        console.log('SIGN:', result.signature);
                         resolve(result);
                     }).catch(exception=>{
                         reject(exception);

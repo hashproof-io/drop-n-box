@@ -1,23 +1,35 @@
 <div class="wrapper">
     <div class="page-header section-dark" style="background-image: url('assets/img/dark-bg.jpg')">
         <div class="container text-center">
-            <div class="col-md-6 download-area ml-auto mr-auto">
-                <p class="description">Choose account that will initiate the file transfer</p>
-                <div class="form-group">
-                    <select [(ngModel)]="sender" name="senderSel">
+            <div class="row">
+                <div class="col-md-8 ml-auto mr-auto text-center">
+                    <h2 class="title">Configuration</h2>
+                    <p class="description">Choose account that will initiate the file transfer</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 download-area ml-auto mr-auto">
+                    <select [(ngModel)]="sender" name="senderSel" class="styled-select blue semi-square">
                         <option [selected]="true" disabled [ngValue]="sender">{{sender.name}}</option>
                         <option *ngFor="let acc of accounts; i as index" [ngValue]="acc">{{acc.name}}</option>
                     </select>
                 </div>
-                <div class="form-group">
+            </div>
+            <div class="row">
+                <div class="col-md-6 download-area ml-auto mr-auto">
                     <input type="password" class="form-control" [(ngModel)]="password" required
                            placeholder="Passphrase">
                 </div>
             </div>
 
-            <button type="button" class="btn btn-danger btn-round" placement="top" ngbTooltip="Save" (click)="setSender()">
-                Save
-            </button>
+            <div class="row">
+                <div class="col-md-6 download-area ml-auto mr-auto">
+                    <button type="button" class="btn btn-danger btn-round"
+                            (click)="setSender()">
+                        Save
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
 </div>

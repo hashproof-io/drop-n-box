@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {Account} from '../model/Account';
+import {SnotifyService} from 'ng-snotify';
 
 @Component({
   selector: 'app-config',
@@ -14,7 +15,7 @@ export class ConfigComponent implements OnInit {
     public sender: Account = new Account();
     public password: string;
 
-    constructor(private http: HttpClient) {}
+    constructor(private http: HttpClient, private snotifyService: SnotifyService) {}
 
     ngOnInit(): void {
         this.getAccounts();
@@ -36,6 +37,16 @@ export class ConfigComponent implements OnInit {
         formData.append('address', this.sender.address);
         formData.append('password', this.password);
         this.http.post<Account>(environment.api + 'address/sender', formData, {})
-            .subscribe(data => alert("Sender changed to " + data.address))
+            .subscribe(data => this.snotifyService.success('Changed to ' + data.address.substr(0, 6) + '...', 'Success', {
+                timeout: 2000,
+                showProgressBar: false,
+                closeOnClick: false,
+                pauseOnHover: true
+            }), error => this.snotifyService.error('Error during change', 'Failed', {
+                timeout: 2000,
+                showProgressBar: false,
+                closeOnClick: false,
+                pauseOnHover: true
+            }));
     }
 }

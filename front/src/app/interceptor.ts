@@ -17,11 +17,13 @@ export class SpinnerInterceptor implements HttpInterceptor {
         next: HttpHandler,
     ): Observable<HttpEvent<any>> {
         return next.handle(req).do(evt => {
-            if (evt instanceof HttpResponse) {
+            if (evt instanceof HttpResponse ) {
                 setTimeout(() => this.spinner.hide(), 1000);
             } else {
                 this.spinner.show();
             }
+        }, error => {
+            this.spinner.hide();
         });
 
     }

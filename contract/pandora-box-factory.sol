@@ -58,14 +58,14 @@ contract PandoraBox {
     }
 
     function openRequest() allowedTo(recipient) public {
-        if (authority.isAccountActive(msg.sender)) {
+        if (authority.isAccountActive(msg.sender) && status == BoxStatus.CLOSED) {
             status = BoxStatus.REQUESTED;
             BoxStatusChangedEvent(status, msg.sender);
         }
     }
 
     function approveOpenRequest(uint256 _recipientEcTag) allowedTo(sender) public {
-        if (authority.isAccountActive(msg.sender)) {
+        if (authority.isAccountActive(msg.sender) && status == BoxStatus.REQUESTED) {
             status = BoxStatus.OPENED;
             recipientEcTag = _recipientEcTag;
             BoxStatusChangedEvent(status, msg.sender);

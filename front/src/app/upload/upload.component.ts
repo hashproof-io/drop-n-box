@@ -20,6 +20,7 @@ export class UploadComponent implements OnInit {
 
     ngOnInit() {
         this.recipient = new Account();
+        this.recipient.address = '0xe66468278347fa6887945c2bc52bf5c6ac90f876';
     }
 
     getRecipient(): void {

@@ -26,7 +26,7 @@ class ApplicationService {
     }
 
     unlock() {
-        this.web3.personal.unlockAccount(this.sender, config.user.passphrase);
+        this.web3.personal.unlockAccount(config.user.address, config.user.passphrase);
     }
 
     setDefaultAccount(address, pwd) {
@@ -74,7 +74,6 @@ class ApplicationService {
         this.unlock();
         return this.fileForce.upload(file, config.user.address, config.user.passphrase)
             .then(result => {
-                console.log(result);
                 let fingerprint = new BigNumber(crypto.createHash('sha256').update(new Buffer(result.signature.toDER())).digest('hex'), 16);
                 return this.pandoraBox.newBox(config.user.address, recipient, result.ecTagHashBn, fingerprint);
             });

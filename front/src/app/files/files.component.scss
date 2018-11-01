@@ -19,7 +19,7 @@
 }
 
 .card-counter.danger{
-  background-color: #ef5350;
+  background-color: #ef9251;
   color: #FFF;
 }
 
@@ -52,9 +52,9 @@
   position: absolute;
   right: 35px;
   top: 65px;
-  font-style: italic;
   text-transform: capitalize;
-  opacity: 0.5;
+  //opacity: 0.5;
   display: block;
   font-size: 18px;
+  color: #fff;
 }
